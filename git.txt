@@ -1,0 +1,15 @@
+git config --global user.name "GTool"
+
+git config --global user.email "gtool@vip.qq.com"
+
+cd C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2
+
+git init
+
+git remote add origin git@code.aliyun.com:gtool/NET.Core.V2_2.git
+
+git add .
+
+git commit -a -m "新建项目"
+
+git push -u origin master
