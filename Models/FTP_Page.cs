@@ -28,7 +28,7 @@ namespace NET.Core.V2_2.Models
         /// <summary>
         /// 页面地址
         /// </summary>
-        [Required]
+        [Required(ErrorMessage ="测试")]
         [StringLength(50)]
         [Display(Name = "地址")]
         public string Address { get; set; }

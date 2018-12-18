@@ -34,12 +34,12 @@
                 @Html.DisplayFor(modelItem => item.Sort)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FTP_Page.Address)
+                @Html.DisplayFor(modelItem => item.FTP_Page.Explain)（@Html.DisplayFor(modelItem => item.FTP_Page.PId)）
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.FGId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.FGId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.FGId">Delete</a>
+                @*<a asp-action="Delete" asp-route-id="@item.FGId">Delete</a>*@
             </td>
         </tr>
 }
