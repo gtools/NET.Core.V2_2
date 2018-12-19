@@ -5,7 +5,6 @@ C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\bin\Debug\netcoreapp2
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\bin\Debug\netcoreapp2.2\NET.Core.V2_2.pdb
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\bin\Debug\netcoreapp2.2\NET.Core.V2_2.Views.dll
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\bin\Debug\netcoreapp2.2\NET.Core.V2_2.Views.pdb
-C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\NET.Core.V2_2.csprojAssemblyReference.cache
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\NET.Core.V2_2.csproj.CoreCompileInputs.cache
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\NET.Core.V2_2.RazorAssemblyInfo.cache
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\NET.Core.V2_2.RazorAssemblyInfo.cs
@@ -45,3 +44,7 @@ C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\FTP_FileUrl\Details.g.cshtml.cs
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\FTP_FileUrl\Edit.g.cshtml.cs
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\FTP_FileUrl\Index.g.cshtml.cs
+C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\FileUpload\Index.g.cshtml.cs
+C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\FileViews\Index.g.cshtml.cs
+C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\NET.Core.V2_2.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\FileViews\Back.g.cshtml.cs

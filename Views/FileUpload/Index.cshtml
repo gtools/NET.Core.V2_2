@@ -1,0 +1,46 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@*@model NET.Core.V2_2.Models.FileUpload*@
+@{
+    ViewData["Title"] = "文件上传";
+}
+@*<div class="row">
+    <div class="col-md-4">
+        <form asp-action="FileUp" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" type="text" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UploadPublicSchedule" class="control-label"></label>
+                <input asp-for="UploadPublicSchedule" type="file" class="form-control" style="height:auto" />
+                <span asp-validation-for="UploadPublicSchedule" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UploadPrivateSchedule" class="control-label"></label>
+                <input asp-for="UploadPrivateSchedule" type="file" class="form-control" style="height:auto" />
+                <span asp-validation-for="UploadPrivateSchedule" class="text-danger"></span>
+            </div>
+            <input type="submit" value="Upload" class="btn btn-default" />
+        </form>
+    </div>
+</div>*@
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" asp-action="FileUp">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <p>Upload one or more files using this form:</p>
+                    <input type="file" name="files" multiple />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Upload" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

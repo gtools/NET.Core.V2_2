@@ -149,13 +149,5 @@ namespace NET.Core.V2_2.Controllers
         {
             return _context.FTP_Pages.Any(e => e.PId == id);
         }
-
-        // 添加测试数据
-        // POST: FTP_Page/TestData/6
-        public async Task<IActionResult> TestData()
-        {
-            await DbInitializer.Initialize(_context).SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
     }
 }
