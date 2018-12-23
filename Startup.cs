@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using NET.Core.V2_2.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NET.Core.V2_2.Models.Data;
 
 namespace NET.Core.V2_2
 {
@@ -42,6 +43,9 @@ namespace NET.Core.V2_2
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            //注入服务
+            services.AddSingleton<IFileViewService, FileViewService>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -63,7 +67,7 @@ namespace NET.Core.V2_2
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            
             app.UseAuthentication();
 
             app.UseMvc(routes =>

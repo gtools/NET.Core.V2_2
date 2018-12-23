@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using NET.Core.V2_2.Data;
 using NET.Core.V2_2.Models;
 
@@ -14,9 +17,15 @@ namespace NET.Core.V2_2.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public FTP_FileUrlController(ApplicationDbContext context)
+        private readonly IHostingEnvironment _env;
+
+        private readonly IConfiguration _config;
+
+        public FTP_FileUrlController(ApplicationDbContext context, IHostingEnvironment hosting, IConfiguration config)
         {
             _context = context;
+            _env = hosting;
+            _config = config;
         }
 
         // GET: FTP_FileUrl
@@ -46,10 +55,40 @@ namespace NET.Core.V2_2.Controllers
         }
 
         // GET: FTP_FileUrl/Create
-        public IActionResult Create()
+        //public IActionResult Create()
+        //{
+        //    ViewData["FGId"] = new SelectList(_context.FTP_FileGroups, "FGId", "Name");
+        //    return View();
+        //}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path">路径</param>
+        /// <param name="file">文件</param>
+        /// <returns></returns>
+        public IActionResult Create(string path, string file)
         {
+
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                //当前目录
+                ViewData["Path_Name"] = _config.GetSection("UserConfig")["DownloadDirectoryString"];
+                //上级目录
+                ViewData["Path_UpName"] = "";
+            }
+            else
+            {
+                ViewData["Path_Name"] = path;
+                ViewData["Path_UpName"] = path.Remove(path.Remove(path.Length - 1).LastIndexOf(@"\") + 1);
+            }
+            //完全路径
+            ViewData["Path"] = _env.WebRootPath + ViewData["Path_Name"];
+
             ViewData["FGId"] = new SelectList(_context.FTP_FileGroups, "FGId", "Name");
-            return View();
+            if (string.IsNullOrWhiteSpace(file))
+                return View();
+            else
+                return View(new FTP_FileUrl() { Name = Path.GetFileName(file), Url = ViewData["Path_Name"] + file });
         }
 
         // POST: FTP_FileUrl/Create

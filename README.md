@@ -4,8 +4,8 @@
 
 - 项目右键添加，添加客户端库，输入名称（名称@版本号）
 
-> 提示 **.Net Core** 最新推出 **libman** ， **bower** 已弃用，
-> 最新 **ASP.Net Core 2.2** 已更新为最新的 **twitter-bootstrap** 
+> 提示 **.Net Core** 最新推出 [libman][2] ， [bower][3] 已弃用，
+> 最新 [ASP.Net Core 2.2][1] 已更新为最新的 **twitter-bootstrap** 
 > 和 **jquery** ，可跳过此步骤。
 
 ``` json
@@ -122,3 +122,66 @@ Update-Database
 > - 1.添加测试数据可能会出现PK出错，如果是外键错误，请自行更改外键PID的值。
 > - 2.下载文件只能在wwwroot文件夹目录下。
 
+## 9. 新添加下载路径的文件列表页面
+
+> 刚学习Net Core 2.2 搞了几天的视图页面发送数据到控制器不会，只能用a标签参数，
+> 还有静态模型传输数据，以后在找新的办法，ajax又不会。哎
+
+## 10. SQL Server GUID 主键测试
+
+> Test1.Tid为GUID类型，在ApplicationDbContext.OnModelCreating方法中添加
+> b.HasKey(t => t.Tid)和b.Property(t => t.Tid).HasDefaultValueSql("newid()")
+
+``` C#
+public class Test1
+{
+    public Guid Tid { get; set; }
+        
+    public string Address { get; set; }
+}
+```
+
+> Test2.Tid为GUID类型，在ApplicationDbContext.OnModelCreating方法中添加
+> b.HasKey(t => t.Tid)和b.Property(t => t.Tid).HasDefaultValueSql("newsequentialid()")
+
+``` C#
+public class Test2
+{
+    public Guid Tid { get; set; }
+        
+    public string Address { get; set; }
+}
+```
+
+> 注意：
+> - 1.[newid()][4] 为少量数据或固定数据时使用，大量数据用 [newsequentialid()][5] 
+> 默认值。（sql server 2008 以上才能使用）
+
+## 11.根据 5 生成视图 Test2 进行 Guid 测试
+
+> 注释test2.Tid = Guid.NewGuid() 要不数据还是 newid()。
+
+``` C#
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Create([Bind("Tid,Address,Explain,Sort")] Test2 test2)
+{
+    if (ModelState.IsValid)
+    {
+        //test2.Tid = Guid.NewGuid();
+        _context.Add(test2);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
+    return View(test2);
+}
+```
+
+> 注意：
+> - newid() 和 newsequentialid() 区别请自行百度。
+
+[1]: https://docs.microsoft.com/zh-cn/aspnet/core/?view=aspnetcore-2.2
+[2]: https://docs.microsoft.com/zh-cn/aspnet/core/client-side/libman/?view=aspnetcore-2.2
+[3]: https://docs.microsoft.com/zh-cn/aspnet/core/client-side/bower?view=aspnetcore-2.2
+[4]: https://docs.microsoft.com/zh-cn/sql/t-sql/functions/newid-transact-sql?view=sql-server-2017
+[5]: https://docs.microsoft.com/zh-cn/sql/t-sql/functions/newsequentialid-transact-sql?view=sql-server-2017

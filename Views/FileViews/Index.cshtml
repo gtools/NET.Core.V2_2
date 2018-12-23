@@ -1,4 +1,4 @@
-﻿@model NET.Core.V2_2.Models.FilesViewModel
+﻿@model NET.Core.V2_2.Models.ViewModels.FileListViewModel
 @{
     ViewData["Title"] = "文件视图列表";
 }
@@ -15,7 +15,7 @@
                 </a>
                 @foreach (var item in Model.FileViewModels)
                 {
-                    @if (item.DirectoryOrFile)
+                    @if (item.IsFile)
                     {
 
                         <a href="#" class="list-group-item list-group-item-action">

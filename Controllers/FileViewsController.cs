@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using NET.Core.V2_2.Models;
+using NET.Core.V2_2.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,7 +21,7 @@ namespace NET.Core.V2_2.Controllers
             _environment = environment;
         }
 
-        private static FilesViewModel _FilesViewModel = new FilesViewModel();
+        private static FileListViewModel _FilesViewModel = new FileListViewModel();
 
         //public IActionResult Index()
         //{
@@ -83,12 +84,12 @@ namespace NET.Core.V2_2.Controllers
             //遍历文件夹
             foreach (var item in dir.GetDirectories())
             {
-                models.Add(new FileViewModel() { Name = item.Name, Path = item.FullName, DirectoryOrFile = false });
+                models.Add(new FileViewModel() { Name = item.Name,  FullName = item.FullName,   IsFile = false });
             }
             //遍历文件
             foreach (var item in dir.GetFiles())
             {
-                var fvm = new FileViewModel() { Name = item.Name, Path = item.FullName, DirectoryOrFile = true };
+                var fvm = new FileViewModel() { Name = item.Name,  FullName = item.FullName,   IsFile = true };
                 models.Add(fvm);
 
             }

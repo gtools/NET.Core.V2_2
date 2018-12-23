@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NET.Core.V2_2.Data;
 
 namespace NET.Core.V2_2.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181223111404_Test1")]
+    partial class Test1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -287,56 +289,6 @@ namespace NET.Core.V2_2.Data.Migrations
                             Tid = new Guid("a1952052-7fdc-411d-86e3-dade962fb790"),
                             Address = "http://sample.com",
                             Explain = "fds",
-                            Sort = 0
-                        });
-                });
-
-            modelBuilder.Entity("NET.Core.V2_2.Models.Test2", b =>
-                {
-                    b.Property<Guid>("Tid")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("newsequentialid()");
-
-                    b.Property<string>("Address");
-
-                    b.Property<string>("Explain");
-
-                    b.Property<int>("Sort")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(5)
-                        .HasDefaultValue(0);
-
-                    b.HasKey("Tid");
-
-                    b.ToTable("Test2s");
-
-                    b.HasData(
-                        new
-                        {
-                            Tid = new Guid("61d8230f-7b89-4f15-8e79-ae65966a929e"),
-                            Address = "1",
-                            Explain = "1",
-                            Sort = 0
-                        },
-                        new
-                        {
-                            Tid = new Guid("31975595-26e5-47c1-bb8c-21b579a11b6b"),
-                            Address = "2",
-                            Explain = "1",
-                            Sort = 0
-                        },
-                        new
-                        {
-                            Tid = new Guid("17ba4f00-ed3a-4a2f-9a2f-26bdb9f11420"),
-                            Address = "3",
-                            Explain = "4",
-                            Sort = 0
-                        },
-                        new
-                        {
-                            Tid = new Guid("c4fb37e8-9f4d-40a8-b469-06b026e682a4"),
-                            Address = "5",
-                            Explain = "5",
                             Sort = 0
                         });
                 });

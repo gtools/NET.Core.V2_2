@@ -1,6 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "测试";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<p>当前地址：@ViewData["Path_Name"]</p>
+
+<p>上级地址：@ViewData["Path_UpName"]</p>
+
+<p>完全地址：@ViewData["Path"]</p>
+
+@await Component.InvokeAsync("FileList", new { path = ViewData["Path_Name"] })
+
+

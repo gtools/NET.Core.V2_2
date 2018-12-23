@@ -1,0 +1,55 @@
+﻿@model IEnumerable<NET.Core.V2_2.Models.ViewModels.FileViewModel>
+
+<div class="row">
+    <div class="col-md-10 mt-3 ml-5">
+        <div class="card">
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action disabled">
+                    <i class="fa fa-chevron-right fa-fw" aria-hidden="true"></i> 路径: <b> @ViewData["Path_Name"]</b>
+                </a>
+                @if (@ViewData["Path_UpName"] == null || string.IsNullOrEmpty(@ViewData["Path_UpName"].ToString()) || @ViewData["Path_UpName"].ToString() == @"\")
+                {
+                    @*<a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Privacy">
+                <i class="fa fa-arrow-left fa-fw" aria-hidden="true"></i> 返回上一级
+            </a>*@
+                    <a href="#" class="list-group-item list-group-item-action disabled">
+                        <i class="fa fa-arrow-left fa-fw" aria-hidden="true"></i> 返回上一级
+                    </a>
+                }
+                else
+                {
+                    @*<a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Privacy" asp-route-path="@ViewData["Path_UpName"]">
+                <i class="fa fa-arrow-left fa-fw" aria-hidden="true"></i> 返回上一级
+            </a>*@
+                    <a class="list-group-item list-group-item-action" asp-route-path="@ViewData["Path_UpName"]">
+                        <i class="fa fa-arrow-left fa-fw" aria-hidden="true"></i> 返回上一级
+                    </a>
+                }
+                @foreach (var item in Model)
+                {
+                    @if (item.IsFile)
+                    {
+                        <a class="list-group-item list-group-item-action" asp-route-path="@ViewData["Path_Name"]" asp-route-file="@item.Name">
+                            <i class="fa fa-file-text-o fa-fw" aria-hidden="true"></i> @Html.DisplayFor(modelItem => item.Name)
+                        </a>
+                    }
+                    else
+                    {
+                        //下级地址
+                        ViewData["Path_DownName"] = ViewData["Path_Name"] + item.Name + @"\";
+
+                        @*<a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Privacy" asp-route-path="@ViewData["Path_DownName"]">
+                            <i class="fa fa-folder-o fa-fw" aria-hidden="true"></i> @Html.DisplayFor(modelItem => item.Name)
+                        </a>*@
+                        <a class="list-group-item list-group-item-action" asp-route-path="@ViewData["Path_DownName"]">
+                            <i class="fa fa-folder-o fa-fw" aria-hidden="true"></i> @Html.DisplayFor(modelItem => item.Name)
+                        </a>
+                        @*<a href="@Html.DisplayFor(modelItem => item.Name)" class="list-group-item list-group-item-action">
+                    <i class="fa fa-folder-o fa-fw" aria-hidden="true"></i> @Html.DisplayFor(modelItem => item.Name)
+                </a>*@
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

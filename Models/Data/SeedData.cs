@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NET.Core.V2_2.Models
+namespace NET.Core.V2_2.Models.Data
 {
     public class SeedData
     {
