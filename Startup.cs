@@ -14,6 +14,7 @@ using NET.Core.V2_2.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NET.Core.V2_2.Models.Data;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace NET.Core.V2_2
 {
@@ -39,14 +40,63 @@ namespace NET.Core.V2_2
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+
+            services.AddIdentity<IdentityUser, IdentityRole>()//替换默认标识
+            //services.AddDefaultIdentity<IdentityUser>()
+            //services.AddDefaultIdentity<ApplicationUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             //注入服务
             services.AddSingleton<IFileViewService, FileViewService>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //身份验证配置
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings.
+                options.Password.RequireDigit = false;//是否数字
+                options.Password.RequireLowercase = false;//是否小写
+                options.Password.RequireNonAlphanumeric = false;//非字母数字
+                options.Password.RequireUppercase = false;//是否大写
+                options.Password.RequiredLength = 1;//长度
+                options.Password.RequiredUniqueChars = 1;//必需的唯一字符
+
+                // Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);//默认锁定时间
+                options.Lockout.MaxFailedAccessAttempts = 5;//最大访问失败尝试
+                options.Lockout.AllowedForNewUsers = true;//允许新用户
+
+                // User settings.
+                //options.User.AllowedUserNameCharacters =
+                //"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.AllowedUserNameCharacters =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";//允许的用户名字符
+                options.User.RequireUniqueEmail = false;//需要唯一的电子邮件
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                //LoginPath， LogoutPath，AccessDeniedPath:地址
+                options.LoginPath = "/Identity/Account/Login";
+                options.LogoutPath = "/Identity/Account/Logout";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
+
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddRazorPagesOptions(options =>
+                {
+                    //完全控制权限的标识 UI
+                    options.AllowAreas = true;
+                    options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
+                    options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
+                });
+            // using Microsoft.AspNetCore.Identity.UI.Services;
+            //services.AddSingleton<IEmailSender, EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,7 +118,7 @@ namespace NET.Core.V2_2
             app.UseStaticFiles();
             app.UseCookiePolicy();
             
-            app.UseAuthentication();
+            app.UseAuthentication();//启用身份验证
 
             app.UseMvc(routes =>
             {
