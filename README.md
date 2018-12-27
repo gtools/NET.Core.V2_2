@@ -118,9 +118,20 @@ Update-Database
 
 ## 8. 完成
 
-> 注意：
-> - 1.添加测试数据可能会出现PK出错，如果是外键错误，请自行更改外键PID的值。
-> - 2.下载文件只能在wwwroot文件夹目录下。
+- 1.添加测试数据可能会出现PK出错，如果是外键错误，
+请自行更改外键PID的值（已用新方法，#6 已弃用，改为一下代码）。
+
+``` C#
+modelBuilder.Entity<Test1>()
+    .HasData(new Test1
+    {
+        Tid = Guid.Parse("{a1952052-7fdc-411d-86e3-dade962fb790}"),
+        Address = "http://sample.com",
+        Explain = "fds"
+    });
+```
+
+- 2.下载文件只能在wwwroot文件夹目录下。
 
 ## 9. 新添加下载路径的文件列表页面
 
@@ -142,7 +153,8 @@ public class Test1
 ```
 
 > Test2.Tid为GUID类型，在ApplicationDbContext.OnModelCreating方法中添加
-> b.HasKey(t => t.Tid)和b.Property(t => t.Tid).HasDefaultValueSql("newsequentialid()")
+> b.HasKey(t => t.Tid)和b.Property(t => t.Tid).HasDefaultValueSql
+> ("newsequentialid()")
 
 ``` C#
 public class Test2
@@ -153,13 +165,12 @@ public class Test2
 }
 ```
 
-> 注意：
-> - 1.[newid()][4] 为少量数据或固定数据时使用，大量数据用 [newsequentialid()][5] 
+> 注意：[newid()][4] 为少量数据或固定数据时使用，大量数据用 [newsequentialid()][5] 
 > 默认值。（sql server 2008 以上才能使用）
 
 ## 11.根据 5 生成视图 Test2 进行 Guid 测试
 
-> 注释test2.Tid = Guid.NewGuid() 要不数据还是 newid()。
+> 注意：test2.Tid = Guid.NewGuid() 要不数据还是 newid()。
 
 ``` C#
 [HttpPost]
@@ -177,11 +188,23 @@ public async Task<IActionResult> Create([Bind("Tid,Address,Explain,Sort")] Test2
 }
 ```
 
-> 注意：
-> - newid() 和 newsequentialid() 区别请自行百度。
+> 注意：newid() 和 newsequentialid() 区别请自行百度。
+
+## 12. Identity 学习
+
+> 注意：2.0到2.1 [Identity][6] 有重大改变，请参考[变动][7]
+> （因为这个变动，我搞了一个星期才弄懂），一定要在项目右键 > 添加 > 新搭建
+> 基建的项目 > 标识 > 标识 > 添加（才能有下图，坑啊，隐藏的太深了）。
+
+![深坑](https://i-msdn.sec.s-msft.com/dynimg/IC879846.png)
+
+
+
 
 [1]: https://docs.microsoft.com/zh-cn/aspnet/core/?view=aspnetcore-2.2
 [2]: https://docs.microsoft.com/zh-cn/aspnet/core/client-side/libman/?view=aspnetcore-2.2
 [3]: https://docs.microsoft.com/zh-cn/aspnet/core/client-side/bower?view=aspnetcore-2.2
 [4]: https://docs.microsoft.com/zh-cn/sql/t-sql/functions/newid-transact-sql?view=sql-server-2017
 [5]: https://docs.microsoft.com/zh-cn/sql/t-sql/functions/newsequentialid-transact-sql?view=sql-server-2017
+[6]: https://docs.microsoft.com/zh-cn/aspnet/core/security/authentication/identity?view=aspnetcore-2.2&tabs=visual-studio
+[7]: https://docs.microsoft.com/zh-cn/aspnet/core/migration/20_21?view=aspnetcore-2.2#changes-to-authentication-code
