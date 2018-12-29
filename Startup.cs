@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NET.Core.V2_2.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NET.Core.V2_2.Models.Data;
-using Microsoft.AspNetCore.Identity.UI.Services;
+using NET.Core.V2_2.Areas.Identity.Data;
+//using Devart.Data.Oracle.Entity.Design;
 
 namespace NET.Core.V2_2
 {
@@ -38,10 +35,11 @@ namespace NET.Core.V2_2
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
+                //options.UseOracle();
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()//替换默认标识
+            services.AddIdentity<ApplicationUser, IdentityRole>()//替换默认标识
             //services.AddDefaultIdentity<IdentityUser>()
             //services.AddDefaultIdentity<ApplicationUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
@@ -54,10 +52,10 @@ namespace NET.Core.V2_2
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
-                options.Password.RequireDigit = false;//是否数字
-                options.Password.RequireLowercase = false;//是否小写
-                options.Password.RequireNonAlphanumeric = false;//非字母数字
-                options.Password.RequireUppercase = false;//是否大写
+                options.Password.RequireDigit = false;//包含数字
+                options.Password.RequireLowercase = false;//包含小写字符
+                options.Password.RequireNonAlphanumeric = false;//包含非字母数字字符
+                options.Password.RequireUppercase = false;//包含大写字符
                 options.Password.RequiredLength = 1;//长度
                 options.Password.RequiredUniqueChars = 1;//必需的唯一字符
 
@@ -70,8 +68,12 @@ namespace NET.Core.V2_2
                 //options.User.AllowedUserNameCharacters =
                 //"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.AllowedUserNameCharacters =
-                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";//允许的用户名字符
-                options.User.RequireUniqueEmail = false;//需要唯一的电子邮件
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";//在用户名中允许的字符。
+                options.User.RequireUniqueEmail = false;//要求每个用户必须拥有唯一的电子邮件。
+
+                // Default SignIn settings.
+                options.SignIn.RequireConfirmedEmail = false;//需要已确认的电子邮件，登录。
+                options.SignIn.RequireConfirmedPhoneNumber = false;//需要确认的电话号码进行登录。
             });
 
             services.ConfigureApplicationCookie(options =>

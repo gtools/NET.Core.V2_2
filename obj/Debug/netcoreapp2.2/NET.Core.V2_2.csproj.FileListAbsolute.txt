@@ -13,7 +13,6 @@ C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\NET.Core.V2_2.TagHelpers.input.cache
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\NET.Core.V2_2.TagHelpers.output.cache
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\NET.Core.V2_2.RazorCoreGenerate.cache
-C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewStart.g.cshtml.cs
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy.g.cshtml.cs
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
@@ -54,7 +53,3 @@ C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\Test2\Details.g.cshtml.cs
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\Test2\Edit.g.cshtml.cs
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\Test2\Index.g.cshtml.cs
-C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\Account\Register.g.cshtml.cs
-C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\Account\_ViewImports.g.cshtml.cs
-C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.g.cshtml.cs
-C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewImports.g.cshtml.cs

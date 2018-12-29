@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NET.Core.V2_2.Areas.Identity.Data;
 using NET.Core.V2_2.Models;
 
 namespace NET.Core.V2_2.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>//添加用户扩展类
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -34,6 +35,14 @@ namespace NET.Core.V2_2.Data
         /// 测试表
         /// </summary>
         public DbSet<Test2> Test2s { get; set; }
+        /// <summary>
+        /// 人员表
+        /// </summary>
+        public DbSet<SYS_Emp> SYS_Emps { get; set; }
+        /// <summary>
+        /// 人员表
+        /// </summary>
+        public DbSet<SYS_Dept> SYS_Depts { get; set; }
 
         //数据库字段配置
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -156,6 +165,26 @@ namespace NET.Core.V2_2.Data
                     Address = "5",
                     Explain = "5"
                 });
+            
+            modelBuilder.Entity<SYS_Dept>(b => {
+                b.HasKey(t => t.Dept_Code);
+
+                b.Property(t => t.Dept_Name)
+                .IsRequired()
+                .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<SYS_Emp>(b => {
+                b.HasKey(t => t.Emp_Code);
+
+                b.Property(t => t.Emp_Name)
+                .IsRequired()
+                .HasMaxLength(50);
+
+                b.HasOne(t => t.SYS_Dept)
+                .WithMany(t => t.SYS_Emps)
+                .HasForeignKey(t => t.Dept_Code);
+            });
         }
     }
 }
