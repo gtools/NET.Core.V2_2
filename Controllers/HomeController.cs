@@ -108,29 +108,50 @@ namespace NET.Core.V2_2.Controllers
 
         public IActionResult SaveChanges()
         {
-            ViewData["alert"] = true;
-            return View("InitialCreate");
+            using (var context = _db)
+            {
+                //数据库构架是否存在，不存在创建，存在不创建。
+                context.Database.EnsureCreated();
 
-            //using (var context = _db)
-            //{
-            //    //数据库构架是否存在，不存在创建，存在不创建。
-            //    context.Database.EnsureCreated();
-            //    //返回第一个匹配值
-            //    var id = Guid.Parse("{a9837ab8-f2da-4658-9f3e-f4b103922d91}");
-            //    var navbar = context.SYS_Navbars.FirstOrDefault(t => t.Id.ToString().ToLower() == id.ToString().ToLower());
-            //    if (navbar == null)
-            //    {
-            //        context.SYS_Navbars.Add(new SYS_Navbar
-            //        {
-            //            Id = id,
-            //            Name = "首页",
-            //            Url = "Index",
-            //            Sort = 0,
-            //            Is_Stop = 0});
-            //    }
-            //    context.SaveChanges();
-            //}
-            //return View("InitialCreate");
+                //菜单
+                //返回第一个匹配值
+                var id = Guid.Parse("{a9837ab8-f2da-4658-9f3e-f4b103922d91}");
+                var navbar = context.SYS_Navbars.FirstOrDefault(t => t.Id.ToString().ToLower() == id.ToString().ToLower());
+                if (navbar == null)
+                {
+                    context.SYS_Navbars.Add(new SYS_Navbar
+                    {
+                        Id = id,
+                        Name = "首页",
+                        Url = "Index"
+                    });
+                }
+                context.SaveChanges();
+                //科室
+                var sys_dept = context.SYS_Depts.FirstOrDefault(t => t.Dept_Code == "9999");
+                if (sys_dept == null)
+                {
+                    context.SYS_Depts.Add(new SYS_Dept
+                    {
+                        Dept_Code = "9999",
+                        Dept_Name = "测试科"
+                    });
+                }
+                context.SaveChanges();
+                //人员
+                var sys_emp = context.SYS_Emps.FirstOrDefault(t => t.Emp_Code == "999999");
+                if (sys_emp == null)
+                {
+                    context.SYS_Emps.Add(new SYS_Emp
+                    {
+                        Emp_Code = "999999",
+                        Emp_Name = "超级管理员",
+                        Dept_Code = "9999"
+                    });
+                }
+                context.SaveChanges();
+            }
+            return View("InitialCreate");
         }
 
 

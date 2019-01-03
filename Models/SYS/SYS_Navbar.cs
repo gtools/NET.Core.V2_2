@@ -38,16 +38,20 @@ namespace NET.Core.V2_2.Models
         /// 停用
         /// </summary>
         [Display(Name = "停用", Order = 4)]
-        public int Is_Stop { get; set; }
+        public bool Is_Stop { get; set; }
         /// <summary>
         /// 上级
         /// </summary>
         [Display(Name = "上级菜单", Order = 5)]
-        public string Parent { get; set; }
+        public Guid? ParentId { get; set; }//外键允许为空要加上问号。
         /// <summary>
         /// 上级
         /// </summary>
         [Display(Name = "上级菜单", Order = 5)]
-        public List<SYS_Navbar> SYS_Navbars { get; set; }
+        public SYS_Navbar Father { get; set; }
+        /// <summary>
+        /// 下级
+        /// </summary>
+        public List<SYS_Navbar> Childs { get; set; }
     }
 }

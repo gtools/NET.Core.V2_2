@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NET.Core.V2_2.Data;
 
 namespace NET.Core.V2_2.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190103020931_SYS_Navbar")]
+    partial class SYS_Navbar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -308,7 +310,7 @@ namespace NET.Core.V2_2.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<Guid?>("ParentId");
+                    b.Property<Guid>("ParentId");
 
                     b.Property<int>("Sort")
                         .ValueGeneratedOnAdd()

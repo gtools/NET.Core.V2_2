@@ -177,11 +177,6 @@ namespace NET.Core.V2_2.Data
                 .IsRequired()
                 .HasMaxLength(50);
             });
-            modelBuilder.Entity<SYS_Dept>().HasData(new SYS_Dept
-                {
-                    Dept_Code = "9999",
-                    Dept_Name = "测试科"
-                });
             //人员
             modelBuilder.Entity<SYS_Emp>(b => {
                 b.HasKey(t => t.Emp_Code);
@@ -193,12 +188,6 @@ namespace NET.Core.V2_2.Data
                 b.HasOne(t => t.SYS_Dept)
                 .WithMany(t => t.SYS_Emps)
                 .HasForeignKey(t => t.Dept_Code);
-            });
-            modelBuilder.Entity<SYS_Emp>().HasData(new SYS_Emp
-            {
-                Emp_Code = "999999",
-                Emp_Name = "超级管理员",
-                Dept_Code = "9999"
             });
             //菜单
             //modelBuilder.Entity<SYS_Navbar>();//包括类
@@ -229,18 +218,12 @@ namespace NET.Core.V2_2.Data
                 .HasDefaultValueSql("NEXT VALUE FOR shared.OrderNumbers");
             */  //序列
 
-
+            //菜单表
             modelBuilder.Entity<SYS_Navbar>(b => {
                 b.ToTable("SYS_Navbar");//表名称
-                //b.ToTable("SYS_Navbar", schema: "dbo");
-
-                
-
-
-
-
 
                 b.HasKey(t => t.Id);
+
                 b.Property(t => t.Id)
                 .HasDefaultValueSql("newid()");
 
@@ -248,12 +231,19 @@ namespace NET.Core.V2_2.Data
                 .IsRequired()
                 .HasMaxLength(50);
 
-                //b.Property(t => t.Path)
-                //.IsRequired();
+                b.Property(t => t.Url)
+                .IsRequired();
 
-                //b.HasOne(t => t.SYS_Dept)
-                //.WithMany(t => t.SYS_Emps)
-                //.HasForeignKey(t => t.Dept_Code);
+                b.Property(t => t.Sort)
+                .HasDefaultValue(0);
+
+                b.Property(t => t.Is_Stop)
+                .HasDefaultValue(false);
+
+                b.HasOne(t => t.Father)
+                .WithMany(t => t.Childs)
+                .HasForeignKey(t => t.ParentId)
+                .OnDelete(DeleteBehavior.ClientSetNull);//子关联不可级联删除
             });
 
 
