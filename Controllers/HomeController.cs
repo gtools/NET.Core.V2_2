@@ -96,6 +96,43 @@ namespace NET.Core.V2_2.Controllers
             return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        /// <summary>
+        /// 初始化GET
+        /// </summary>
+        /// <returns></returns>
+        [Route("InitialCreate")]
+        public IActionResult InitialCreate()
+        {
+            return View("InitialCreate");
+        }
+
+        public IActionResult SaveChanges()
+        {
+            ViewData["alert"] = true;
+            return View("InitialCreate");
+
+            //using (var context = _db)
+            //{
+            //    //数据库构架是否存在，不存在创建，存在不创建。
+            //    context.Database.EnsureCreated();
+            //    //返回第一个匹配值
+            //    var id = Guid.Parse("{a9837ab8-f2da-4658-9f3e-f4b103922d91}");
+            //    var navbar = context.SYS_Navbars.FirstOrDefault(t => t.Id.ToString().ToLower() == id.ToString().ToLower());
+            //    if (navbar == null)
+            //    {
+            //        context.SYS_Navbars.Add(new SYS_Navbar
+            //        {
+            //            Id = id,
+            //            Name = "首页",
+            //            Url = "Index",
+            //            Sort = 0,
+            //            Is_Stop = 0});
+            //    }
+            //    context.SaveChanges();
+            //}
+            //return View("InitialCreate");
+        }
+
 
 
 

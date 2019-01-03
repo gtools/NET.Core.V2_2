@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "初始化数据";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="SaveChanges">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        初始化数据
+    </button>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">询问</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    是否执行初始化数据库操作？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">否</button>
+                    <button type="submit" class="btn btn-primary">是</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+<div class="modal fade bd-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="mySmallModalLabel">提示</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                失败
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+@if (ViewData["alert"]!=null)
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#myModal").modal({
+
+                remote: "html/htmlpage.html",//可以填写一个url，会调用jquery load方法加载数据
+
+                backdrop: "static",//指定一个静态背景，当用户点击背景处，modal界面不会消失
+
+                keyboard: true,//当按下esc键时，modal框消失
+
+            })
+
+        })
+    </script>
+}
+

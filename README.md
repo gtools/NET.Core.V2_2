@@ -198,6 +198,35 @@ public async Task<IActionResult> Create([Bind("Tid,Address,Explain,Sort")] Test2
 
 ![深坑](https://i-msdn.sec.s-msft.com/dynimg/IC879846.png)
 
+## 13. 远程验证
+
+> [Remote] 为[远程验证][8]，action 方法，controller 为控制器。
+
+``` C#
+/// <summary>
+/// 科室编号
+/// </summary>
+[Remote(action: "VerifyDept_Code", controller: "SYS_Dept")]
+[Required(ErrorMessage = Validate.Required)]
+[StringLength(50, MinimumLength = 3, ErrorMessage = Validate.StringLength)]
+[Display(Name = "科室编号", Order = 1)]
+public string Dept_Code { get; set; }
+```
+
+> [dept_code] 为字段名（大小写无所谓）。
+
+``` C#
+[AcceptVerbs("Get", "Post")]
+public IActionResult VerifyDept_Code(string dept_code)
+{
+    if (_context.SYS_Depts.Where(t => t.Dept_Code == dept_code).Count() > 0)
+    {
+        return Json($"部门代码 {dept_code} 已存在。");
+    }
+
+    return Json(true);
+}
+```
 
 
 
@@ -208,3 +237,4 @@ public async Task<IActionResult> Create([Bind("Tid,Address,Explain,Sort")] Test2
 [5]: https://docs.microsoft.com/zh-cn/sql/t-sql/functions/newsequentialid-transact-sql?view=sql-server-2017
 [6]: https://docs.microsoft.com/zh-cn/aspnet/core/security/authentication/identity?view=aspnetcore-2.2&tabs=visual-studio
 [7]: https://docs.microsoft.com/zh-cn/aspnet/core/migration/20_21?view=aspnetcore-2.2#changes-to-authentication-code
+[8]: https://docs.microsoft.com/zh-cn/aspnet/core/mvc/models/validation?view=aspnetcore-2.2#remote-validation

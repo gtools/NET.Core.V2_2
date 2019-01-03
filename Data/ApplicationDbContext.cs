@@ -40,9 +40,13 @@ namespace NET.Core.V2_2.Data
         /// </summary>
         public DbSet<SYS_Emp> SYS_Emps { get; set; }
         /// <summary>
-        /// 人员表
+        /// 科室表
         /// </summary>
         public DbSet<SYS_Dept> SYS_Depts { get; set; }
+        /// <summary>
+        /// 菜单表
+        /// </summary>
+        public DbSet<SYS_Navbar> SYS_Navbars { get; set; }
 
         //数据库字段配置
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -165,7 +169,7 @@ namespace NET.Core.V2_2.Data
                     Address = "5",
                     Explain = "5"
                 });
-            
+            //科室
             modelBuilder.Entity<SYS_Dept>(b => {
                 b.HasKey(t => t.Dept_Code);
 
@@ -173,7 +177,12 @@ namespace NET.Core.V2_2.Data
                 .IsRequired()
                 .HasMaxLength(50);
             });
-
+            modelBuilder.Entity<SYS_Dept>().HasData(new SYS_Dept
+                {
+                    Dept_Code = "9999",
+                    Dept_Name = "测试科"
+                });
+            //人员
             modelBuilder.Entity<SYS_Emp>(b => {
                 b.HasKey(t => t.Emp_Code);
 
@@ -185,6 +194,71 @@ namespace NET.Core.V2_2.Data
                 .WithMany(t => t.SYS_Emps)
                 .HasForeignKey(t => t.Dept_Code);
             });
+            modelBuilder.Entity<SYS_Emp>().HasData(new SYS_Emp
+            {
+                Emp_Code = "999999",
+                Emp_Name = "超级管理员",
+                Dept_Code = "9999"
+            });
+            //菜单
+            //modelBuilder.Entity<SYS_Navbar>();//包括类
+            //modelBuilder.Ignore<SYS_Navbar>();//排除类
+            //b.Ignore(t => t.LoadedFromDatabase);//排除属性
+            //b.ToTable("SYS_Navbar");//表名称
+            //.HasColumnName("blog_id");//列名
+            //.HasColumnType("varchar(200)");//数据类型
+            //b.HasKey(b => b.BlogId).HasName("PrimaryKey_BlogId");//主键
+            //.HasComputedColumnSql("[LastName] + ', ' + [FirstName]");//计算列
+            //.HasDefaultValue(3);//默认值
+            //.HasDefaultValueSql("getdate()");//默认值
+
+            /* //外键
+            .HasOne(p => p.Blog)
+            .WithMany(b => b.Posts)
+            .HasForeignKey(p => p.BlogId)
+            .HasConstraintName("ForeignKey_Post_Blog");
+            */ //外键
+
+            /*   //序列
+            modelBuilder.HasSequence<int>("OrderNumbers", schema: "shared")
+            .StartsAt(1000)
+            .IncrementsBy(5);
+
+            modelBuilder.Entity<Order>()
+                .Property(o => o.OrderNo)
+                .HasDefaultValueSql("NEXT VALUE FOR shared.OrderNumbers");
+            */  //序列
+
+
+            modelBuilder.Entity<SYS_Navbar>(b => {
+                b.ToTable("SYS_Navbar");//表名称
+                //b.ToTable("SYS_Navbar", schema: "dbo");
+
+                
+
+
+
+
+
+                b.HasKey(t => t.Id);
+                b.Property(t => t.Id)
+                .HasDefaultValueSql("newid()");
+
+                b.Property(t => t.Name)
+                .IsRequired()
+                .HasMaxLength(50);
+
+                //b.Property(t => t.Path)
+                //.IsRequired();
+
+                //b.HasOne(t => t.SYS_Dept)
+                //.WithMany(t => t.SYS_Emps)
+                //.HasForeignKey(t => t.Dept_Code);
+            });
+
+
+
+
         }
     }
 }
