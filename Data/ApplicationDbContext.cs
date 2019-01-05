@@ -227,13 +227,6 @@ namespace NET.Core.V2_2.Data
                 b.Property(t => t.Id)
                 .HasDefaultValueSql("newid()");
 
-                b.Property(t => t.Name)
-                .IsRequired()
-                .HasMaxLength(50);
-
-                b.Property(t => t.Url)
-                .IsRequired();
-
                 b.Property(t => t.Sort)
                 .HasDefaultValue(0);
 

@@ -72,3 +72,10 @@ C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\NET.Core.V2_2.pdb
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\NET.Core.V2_2.csproj.CopyComplete
 C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\NET.Core.V2_2.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Components\Navbar\Default.g.cshtml.cs
+C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\SYS_Navbar\Create.g.cshtml.cs
+C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\SYS_Navbar\Delete.g.cshtml.cs
+C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\SYS_Navbar\Details.g.cshtml.cs
+C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\SYS_Navbar\Edit.g.cshtml.cs
+C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\SYS_Navbar\Index.g.cshtml.cs
+C:\Users\Administrator\Desktop\NET.Core.V2_2\NET.Core.V2_2\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index1.g.cshtml.cs

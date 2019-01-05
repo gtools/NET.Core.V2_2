@@ -228,6 +228,56 @@ public IActionResult VerifyDept_Code(string dept_code)
 }
 ```
 
+## 14. EntityFramework Core 树形结构，自关联，空外键。
+
+``` C#
+public class SYS_Navbar
+{
+    public Guid Id { get; set; }
+    public string Name { get; set; }
+    public Guid? ParentId { get; set; }//外键允许为空要加上问号。
+    public SYS_Navbar Father { get; set; }
+    public List<SYS_Navbar> Childs { get; set; }
+}
+
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<SYS_Navbar>(b => {
+        b.HasKey(t => t.Id);
+        b.Property(t => t.Id)
+        .HasDefaultValueSql("newid()");
+        b.HasOne(t => t.Father)
+        .WithMany(t => t.Childs)
+        .HasForeignKey(t => t.ParentId)
+        .OnDelete(DeleteBehavior.ClientSetNull);//子关联不可级联删除
+    });
+}
+```
+
+## 15. 初始化数据另一种写法。
+
+``` C#
+using (var context = new ApplicationDbContext())
+{
+    //数据库构架是否存在，不存在创建，存在不创建。
+    context.Database.EnsureCreated();
+
+    //菜单
+    //返回第一个匹配值
+    var id = Guid.Parse("{a9837ab8-f2da-4658-9f3e-f4b103922d91}");
+    var navbar = context.SYS_Navbars.FirstOrDefault(t => t.Id.ToString().ToLower() == id.ToString().ToLower());
+    if (navbar == null)
+    {
+        context.SYS_Navbars.Add(new SYS_Navbar
+        {
+            Id = id,
+            Name = "首页",
+            Url = "Index"
+        });
+    }
+    context.SaveChanges();
+}
+```
 
 
 [1]: https://docs.microsoft.com/zh-cn/aspnet/core/?view=aspnetcore-2.2

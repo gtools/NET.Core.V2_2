@@ -18,38 +18,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">第六人民医院信息化建设</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">首页</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="FTP_Page" asp-action="Index">页面</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="FTP_FileGroup" asp-action="Index">文件组</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="FTP_FileUrl" asp-action="Index">文件地址</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="FileUpload" asp-action="Index">文件上传</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="FileViews" asp-action="Index">文件视图列表</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        @await Component.InvokeAsync("Navbar")
     </header>
     <div class="container">
         <partial name="_CookieConsentPartial" />
@@ -60,7 +29,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2018 - 第六人民医院信息化建设 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2018-2019 &nbsp;&nbsp;&nbsp;&nbsp; 第六人民医院信息化建设 - <a asp-controller="Home" asp-action="Privacy">信息科</a>
         </div>
     </footer>
 

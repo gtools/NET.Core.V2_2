@@ -20,15 +20,17 @@ namespace NET.Core.V2_2.Models
         /// 菜单名称
         /// </summary>
         [Required(ErrorMessage = Validate.Required)]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = Validate.StringLength)]
         [Display(Name = "菜单名称", Order = 1)]
         public string Name { get; set; }
         /// <summary>
         /// 菜单地址
         /// </summary>
-        [Required(ErrorMessage = Validate.Required)]
         [Display(Name = "菜单地址", Order = 2)]
         public string Url { get; set; }
+        [Display(Name = "动作", Order = 9)]
+        public string Action { get; set; }
+        [Display(Name = "控制", Order = 8)]
+        public string Controller { get; set; }
         /// <summary>
         /// 排序
         /// </summary>

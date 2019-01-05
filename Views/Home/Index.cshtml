@@ -2,24 +2,7 @@
 @{
     ViewData["Title"] = "首页";
 }
-
-<div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-sm-12 col-md-6 col-lg-4 mt-3">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h3>
-                </div>
-                <div class="card-body">
-                    <div class="list-group">
-                        @foreach (var arr in item.FTP_FileUrls)
-                        {
-                        <a href="@Html.DisplayFor(modelItem => arr.Url)" class="list-group-item list-group-item-action">@Html.DisplayFor(modelItem => arr.Name)</a>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-</div>
+<h1 class="text-center pt-3">
+    第六人民医院信息化系统
+</h1>
+<p class="text-center font-weight-bold pt-3"><i class="fa fa-wrench"></i> 建设中 <i class="fa fa-circle-o-notch fa-spin"></i></p>

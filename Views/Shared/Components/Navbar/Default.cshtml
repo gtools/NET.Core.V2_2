@@ -1,0 +1,66 @@
+﻿@model IEnumerable<NET.Core.V2_2.Models.SYS_Navbar>
+
+@{
+    int i = 0;
+    string str = "navbarDropdownMenuLink";
+}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-info border-bottom box-shadow mb-3">
+    <div class="container">
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">第六人民医院信息化建设</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-sm-inline-flex flex-sm-row-reverse" id="navbarNavDropdown">
+            <partial name="_LoginPartial" />
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item active">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">首页</a>
+                </li>
+                @foreach (var item in Model)
+                {
+                    if (item.Childs is null)
+                    {
+                        if (string.IsNullOrWhiteSpace(item.Url))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="@item.Controller" asp-action="@item.Action">@Html.DisplayFor(modelItem => item.Name)</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@item.Url">@Html.DisplayFor(modelItem => item.Name)</a>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        i++;
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="@str@i.ToString()" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="@str@i.ToString()">
+                                <span class="dropdown-header">@Html.DisplayFor(modelItem => item.Name)</span>
+                                <div class="dropdown-divider"></div>
+                                @foreach (var arr in item.Childs)
+                                {
+                                    if (string.IsNullOrWhiteSpace(arr.Url))
+                                    {
+                                        <a class="dropdown-item" asp-controller="@arr.Controller" asp-action="@arr.Action">@Html.DisplayFor(modelItem => arr.Name)</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="dropdown-item" href="@arr.Url">@Html.DisplayFor(modelItem => arr.Name)</a>
+                                    }
+                                }
+                            </div>
+                        </li>
+                    }
+                }
+            </ul>
+
+        </div>
+    </div>
+</nav>

@@ -33,14 +33,16 @@ namespace NET.Core.V2_2.Controllers
             _file = file;
         }
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
         [Route("")]
         [Route("Index")]
         [Route("Home/Index")]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [Route("Home/Index1")]
+        public async Task<IActionResult> Index1()
         {
             var result = await _db.FTP_Pages
             .Where(t => t.Address.ToUpper().Contains("index".ToUpper()))//查询
@@ -112,21 +114,112 @@ namespace NET.Core.V2_2.Controllers
             {
                 //数据库构架是否存在，不存在创建，存在不创建。
                 context.Database.EnsureCreated();
-
-                //菜单
-                //返回第一个匹配值
-                var id = Guid.Parse("{a9837ab8-f2da-4658-9f3e-f4b103922d91}");
-                var navbar = context.SYS_Navbars.FirstOrDefault(t => t.Id.ToString().ToLower() == id.ToString().ToLower());
+                
+                #region 菜单
+                var pid = Guid.Parse("{a9837ab8-f2da-4658-9f3e-f4b103922d91}");
+                var id = pid;
+                var navbar = context.SYS_Navbars.FirstOrDefault(t => t.Id.ToString().ToLower() == id.ToString().ToLower());//返回第一个匹配值
                 if (navbar == null)
                 {
                     context.SYS_Navbars.Add(new SYS_Navbar
                     {
                         Id = id,
-                        Name = "首页",
-                        Url = "Index"
+                        Name = "测试页面",
+                        Sort = 9
                     });
                 }
-                context.SaveChanges();
+                id = Guid.Parse("{4a8b8625-4d04-4e53-9b47-e0d36d637708}");
+                navbar = context.SYS_Navbars.FirstOrDefault(t => t.Id.ToString().ToLower() == id.ToString().ToLower());
+                if (navbar == null)
+                {
+                    context.SYS_Navbars.Add(new SYS_Navbar
+                    {
+                        Id = id,
+                        Name = "文件页面设置",
+                        Controller = "FTP_Page",
+                        Action = "Index",
+                        ParentId = pid
+                    });
+                }
+                id = Guid.Parse("{654d88c1-3df4-469b-9d82-bccc3745fb92}");
+                navbar = context.SYS_Navbars.FirstOrDefault(t => t.Id.ToString().ToLower() == id.ToString().ToLower());
+                if (navbar == null)
+                {
+                    context.SYS_Navbars.Add(new SYS_Navbar
+                    {
+                        Id = id,
+                        Name = "文件组设置",
+                        Controller = "FTP_FileGroup",
+                        Action = "Index",
+                        ParentId = pid
+                    });
+                }
+                id = Guid.Parse("{80f58e2b-725b-44b7-b907-653c7c186828}");
+                navbar = context.SYS_Navbars.FirstOrDefault(t => t.Id.ToString().ToLower() == id.ToString().ToLower());
+                if (navbar == null)
+                {
+                    context.SYS_Navbars.Add(new SYS_Navbar
+                    {
+                        Id = id,
+                        Name = "文件地址设置",
+                        Controller = "FTP_FileUrl",
+                        Action = "Index",
+                        ParentId = pid
+                    });
+                }
+                id = Guid.Parse("{ef60c26d-dd8a-4420-b5ed-43df62e4691e}");
+                navbar = context.SYS_Navbars.FirstOrDefault(t => t.Id.ToString().ToLower() == id.ToString().ToLower());
+                if (navbar == null)
+                {
+                    context.SYS_Navbars.Add(new SYS_Navbar
+                    {
+                        Id = id,
+                        Name = "文件上传",
+                        Controller = "FileUpload",
+                        Action = "Index",
+                        ParentId = pid
+                    });
+                }
+                id = Guid.Parse("{b6587a4f-f1df-4d14-814d-3b77ca6a3f06}");
+                navbar = context.SYS_Navbars.FirstOrDefault(t => t.Id.ToString().ToLower() == id.ToString().ToLower());
+                if (navbar == null)
+                {
+                    context.SYS_Navbars.Add(new SYS_Navbar
+                    {
+                        Id = id,
+                        Name = "文件列表",
+                        Controller = "FileViews",
+                        Action = "Index",
+                        ParentId = pid
+                    });
+                }
+                pid = Guid.Parse("{d41c62a6-e8d5-48a3-b4b0-71c968c44b09}");
+                id = pid;
+                navbar = context.SYS_Navbars.FirstOrDefault(t => t.Id.ToString().ToLower() == id.ToString().ToLower());
+                if (navbar == null)
+                {
+                    context.SYS_Navbars.Add(new SYS_Navbar
+                    {
+                        Id = id,
+                        Name = "系统设置",
+                        Sort = 8
+                    });
+                }
+                id = Guid.Parse("{7ad48c8b-9d20-49e2-9959-ddf1515888f4}");
+                navbar = context.SYS_Navbars.FirstOrDefault(t => t.Id.ToString().ToLower() == id.ToString().ToLower());
+                if (navbar == null)
+                {
+                    context.SYS_Navbars.Add(new SYS_Navbar
+                    {
+                        Id = id,
+                        Name = "菜单设置",
+                        Controller = "SYS_Navbar",
+                        Action = "Index",
+                        ParentId = pid
+                    });
+                }
+                #endregion
+
                 //科室
                 var sys_dept = context.SYS_Depts.FirstOrDefault(t => t.Dept_Code == "9999");
                 if (sys_dept == null)
@@ -137,7 +230,6 @@ namespace NET.Core.V2_2.Controllers
                         Dept_Name = "测试科"
                     });
                 }
-                context.SaveChanges();
                 //人员
                 var sys_emp = context.SYS_Emps.FirstOrDefault(t => t.Emp_Code == "999999");
                 if (sys_emp == null)
@@ -149,9 +241,10 @@ namespace NET.Core.V2_2.Controllers
                         Dept_Code = "9999"
                     });
                 }
+                //保存
                 context.SaveChanges();
             }
-            return View("InitialCreate");
+            return View("Index");
         }
 
 
